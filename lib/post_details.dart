@@ -1,12 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:news_aggreator/post.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:news_aggreator/strings.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PostDetails extends StatefulWidget {
   PostDetails(this.post);
+
   final Post post;
 
   @override
@@ -59,6 +60,8 @@ class _PostDetailsState extends State<PostDetails> {
                 fontWeight: FontWeight.bold),
           ),
           new Padding(
+//              Padding 是用来给一个控件 设置 padding 值的。 padding 属性值是 EdgeInsets 对象，可以指定上下左右的边距值；
+// 而 child 属性是一个 Widget 对象，是需要留白的那个控件。
             padding: new EdgeInsets.symmetric(vertical: 10.0),
             child: new Divider(
               height: 1.0,
@@ -74,11 +77,15 @@ class _PostDetailsState extends State<PostDetails> {
               ),
               new Padding(
                 padding: new EdgeInsets.symmetric(horizontal: 10.0),
-                child: new Text(getFormattedTime()),
+                child: new Text(
+                  getFormattedTime(),
+                  style: new TextStyle(color: Colors.teal),
+                ),
               )
             ],
           ),
           new Container(
+//          如果要给 Widget 设置 Margin 或者 背景颜色，就需要使用 Container 了, 和 Padding 相比， Container 的属性要多一些
             width: double.infinity,
             height: 150.0,
             margin: new EdgeInsets.all(10.0),
