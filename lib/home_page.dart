@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:news_aggreator/post.dart';
 import 'package:news_aggreator/post_details.dart';
 import 'package:news_aggreator/strings.dart';
-import 'package:http/http.dart' as http;
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -72,7 +73,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void sendRequest() async {
     String url =
-        "https://api.nytimes.com/svc/topstories/v2/technology.json?api-key=${Strings .apiKey}";
+        "https://api.nytimes.com/svc/topstories/v2/technology.json?api-key=${Strings
+        .apiKey}";
     try {
       http.Response response = await http.get(url);
       // Did request succeeded?
@@ -122,7 +124,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: new TextStyle(color: Colors.black, fontSize: 18.0),
                 ),
               )),
-
             ],
           ),
         ),
@@ -135,6 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
     for (var jsonObject in results) {
       var post = Post.getPostFrmJSONPost(jsonObject);
       postList.add(post);
+      //print result
       print(post);
     }
     setState(() => _isRequestSent = true);
@@ -182,9 +184,27 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   openDetailsUI(Post post) {
-    Navigator.push(
-        context,
-        new MaterialPageRoute(
-            builder: (BuildContext context) => new PostDetails(post)));
+//    Navigator.push(
+//        context,
+//        new MaterialPageRoute(
+//            builder: (BuildContext context) => new PostDetails(post)));
+
+    Navigator.of(context).push(new PageRouteBuilder(
+        opaque: false,
+        pageBuilder: (BuildContext context, _, __) {
+          return new PostDetails(post);
+        },
+        transitionsBuilder: (_, Animation<double> animation, __, Widget child) {
+          return new FadeTransition(
+            opacity: animation,
+            child: new SlideTransition(
+                position: new Tween<Offset>(
+                  begin: const Offset(0.0, 1.0),
+                  end: Offset.zero,
+                )
+                    .animate(animation),
+                child: child),
+          );
+        }));
   }
 }
