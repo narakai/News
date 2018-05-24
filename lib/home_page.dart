@@ -31,9 +31,9 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   final drawerItems = [
-    new DrawerItem(Strings.appName, Icons.rss_feed),
-    new DrawerItem("Fragment 2", Icons.local_pizza),
-    new DrawerItem("Fragment 3", Icons.info)
+//    new DrawerItem(Strings.appName, Icons.rss_feed),
+    new DrawerItem("Fragment 0", Icons.local_pizza),
+    new DrawerItem("Fragment 1", Icons.info)
   ];
 
   @override
@@ -61,27 +61,25 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedDrawerIndex = 0;
 
   _onSelectItem(int index) {
-    setState(() => _selectedDrawerIndex = index);
+//    setState(() => _selectedDrawerIndex = index);
     Navigator.of(context).pop(); // close the drawer
-    if (index > 0)
-      Navigator.of(context).push(new PageRouteBuilder(
-          opaque: false,
-          pageBuilder: (BuildContext context, _, __) {
-            return new Page("Page " + index.toString());
-          },
-          transitionsBuilder:
-              (_, Animation<double> animation, __, Widget child) {
-            return new FadeTransition(
-              opacity: animation,
-              child: new SlideTransition(
-                  position: new Tween<Offset>(
-                    begin: const Offset(0.0, 1.0),
-                    end: Offset.zero,
-                  )
-                      .animate(animation),
-                  child: child),
-            );
-          }));
+    Navigator.of(context).push(new PageRouteBuilder(
+        opaque: false,
+        pageBuilder: (BuildContext context, _, __) {
+          return new Page("Page " + index.toString());
+        },
+        transitionsBuilder: (_, Animation<double> animation, __, Widget child) {
+          return new FadeTransition(
+            opacity: animation,
+            child: new SlideTransition(
+                position: new Tween<Offset>(
+                  begin: const Offset(0.0, 1.0),
+                  end: Offset.zero,
+                )
+                    .animate(animation),
+                child: child),
+          );
+        }));
   }
 
   @override
@@ -102,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
       drawerOptions.add(new ListTile(
         leading: new Icon(d.icon),
         title: new Text(d.title),
-        selected: i == _selectedDrawerIndex,
+//        selected: i == _selectedDrawerIndex,
         onTap: () => _onSelectItem(i),
       ));
     }
@@ -111,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: new Text(widget.drawerItems[_selectedDrawerIndex].title),
+        title: new Text(Strings.appName),
       ),
       drawer: new Drawer(
         child: new Column(
@@ -121,15 +119,15 @@ class _MyHomePageState extends State<MyHomePage> {
               accountName: new Text("Bramvbilsen"),
               currentAccountPicture: new GestureDetector(
                 child: new CircleAvatar(
-                  backgroundImage: new NetworkImage(currentProfilePic),
-                ),
+                    backgroundImage: new NetworkImage(currentProfilePic),
+                    backgroundColor: Colors.transparent),
                 onTap: () => print("This is your current account."),
               ),
               otherAccountsPictures: <Widget>[
                 new GestureDetector(
                   child: new CircleAvatar(
-                    backgroundImage: new NetworkImage(otherProfilePic),
-                  ),
+                      backgroundImage: new NetworkImage(otherProfilePic),
+                      backgroundColor: Colors.transparent),
                   onTap: () => switchAccounts(),
                 ),
               ],
