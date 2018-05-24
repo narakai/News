@@ -25,12 +25,12 @@ class _PostDetailsState extends State<PostDetails> {
         appBar: new AppBar(
           title: new Text(
             post.title,
-            style: new TextStyle(fontSize: 16.0),
+            style: const TextStyle(fontSize: 16.0),
             overflow: TextOverflow.fade,
           ),
           actions: <Widget>[
             new IconButton(
-                icon: new Icon(
+                icon: const Icon(
                   Icons.share,
                   color: Colors.white,
                 ),
@@ -48,13 +48,13 @@ class _PostDetailsState extends State<PostDetails> {
 
   Widget _postCardView() {
     return new Container(
-      margin: new EdgeInsets.all(10.0),
+      margin: const EdgeInsets.all(10.0),
       child: new Column(
         children: <Widget>[
           new Text(
             post.title,
             textAlign: TextAlign.center,
-            style: new TextStyle(
+            style: const TextStyle(
                 color: Colors.black,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold),
@@ -62,8 +62,8 @@ class _PostDetailsState extends State<PostDetails> {
           new Padding(
 //              Padding 是用来给一个控件 设置 padding 值的。 padding 属性值是 EdgeInsets 对象，可以指定上下左右的边距值；
 // 而 child 属性是一个 Widget 对象，是需要留白的那个控件。
-            padding: new EdgeInsets.symmetric(vertical: 10.0),
-            child: new Divider(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: const Divider(
               height: 1.0,
               color: Colors.black,
             ),
@@ -71,15 +71,15 @@ class _PostDetailsState extends State<PostDetails> {
           new Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Icon(
+              const Icon(
                 Icons.access_time,
                 color: Colors.grey,
               ),
               new Padding(
-                padding: new EdgeInsets.symmetric(horizontal: 10.0),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: new Text(
                   getFormattedTime(),
-                  style: new TextStyle(color: Colors.teal),
+                  style: const TextStyle(color: Colors.teal),
                 ),
               )
             ],
@@ -88,11 +88,11 @@ class _PostDetailsState extends State<PostDetails> {
 //          如果要给 Widget 设置 Margin 或者 背景颜色，就需要使用 Container 了, 和 Padding 相比， Container 的属性要多一些
             width: double.infinity,
             height: 150.0,
-            margin: new EdgeInsets.all(10.0),
+            margin: const EdgeInsets.all(10.0),
             child: new CachedNetworkImage(
               imageUrl: post.thumbUrl,
               fit: BoxFit.cover,
-              placeholder: new Icon(
+              placeholder: const Icon(
                 Icons.panorama,
                 color: Colors.grey,
                 size: 120.0,
@@ -101,17 +101,17 @@ class _PostDetailsState extends State<PostDetails> {
           ),
           new Text(
             post.summary,
-            style: new TextStyle(
+            style: const TextStyle(
               fontSize: 16.0,
             ),
           ),
           new Container(
-            margin: new EdgeInsets.only(top: 20.0),
+            margin: const EdgeInsets.only(top: 20.0),
             child: new RaisedButton(
               onPressed: _launchUrl,
               child: new Text(
                 Strings.readMore,
-                style: new TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               ),
               color: Theme.of(context).accentColor,
               splashColor: Colors.deepOrangeAccent,

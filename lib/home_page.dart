@@ -45,9 +45,9 @@ class _MyHomePageState extends State<MyHomePage> {
   bool _isRequestFailed = false;
   List<Post> postList = [];
 
-  String currentProfilePic =
+   String currentProfilePic =
       "https://avatars3.githubusercontent.com/u/16825392?s=460&v=4";
-  String otherProfilePic =
+   String otherProfilePic =
       "https://yt3.ggpht.com/-2_2skU9e2Cw/AAAAAAAAAAI/AAAAAAAAAAA/6NpH9G8NWf4/s900-c-k-no-mo-rj-c0xffffff/photo.jpg";
 
   void switchAccounts() {
@@ -109,14 +109,14 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: new Text(Strings.appName),
+        title: const Text(Strings.appName),
       ),
       drawer: new Drawer(
         child: new Column(
           children: <Widget>[
             new UserAccountsDrawerHeader(
-              accountEmail: new Text("bramvbilsen@gmail.com"),
-              accountName: new Text("Bramvbilsen"),
+              accountEmail: const Text("bramvbilsen@gmail.com"),
+              accountName: const Text("Bramvbilsen"),
               currentAccountPicture: new GestureDetector(
                 child: new CircleAvatar(
                     backgroundImage: new NetworkImage(currentProfilePic),
@@ -145,7 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
         alignment: Alignment.center,
         child: !_isRequestSent
             //  Request has not been sent, let's show a progress indicator
-            ? new CircularProgressIndicator()
+            ? const CircularProgressIndicator()
             // Request has been sent but did it fail?
             : _isRequestFailed
                 // Yes, it has failed. Show a retry UI
@@ -201,7 +201,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: new CachedNetworkImage(
                   imageUrl: post.thumbUrl,
                   fit: BoxFit.cover,
-                  placeholder: new Icon(
+                  placeholder: const Icon(
                     Icons.panorama,
                     color: Colors.grey,
                     size: 120.0,
@@ -210,10 +210,10 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               new Expanded(
                   child: new Container(
-                margin: new EdgeInsets.all(10.0),
+                margin: const EdgeInsets.all(10.0),
                 child: new Text(
                   post.title,
-                  style: new TextStyle(color: Colors.black, fontSize: 18.0),
+                  style: const TextStyle(color: Colors.black, fontSize: 18.0),
                 ),
               )),
             ],
@@ -246,17 +246,17 @@ class _MyHomePageState extends State<MyHomePage> {
       child: new Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          new Text(
+          const Text(
             Strings.requestFailed,
-            style: new TextStyle(fontSize: 16.0),
+            style: const TextStyle(fontSize: 16.0),
           ),
           new Padding(
-            padding: new EdgeInsets.only(top: 10.0),
+            padding: const EdgeInsets.only(top: 10.0),
             child: new RaisedButton(
               onPressed: retryRequest,
               child: new Text(
                 Strings.retry,
-                style: new TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               ),
               color: Theme.of(context).accentColor,
               splashColor: Colors.deepOrangeAccent,
